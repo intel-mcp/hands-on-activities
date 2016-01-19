@@ -100,3 +100,69 @@ answer the question:
 1. How Many threads are available at the Intel Xeon? And at the Intel Xeon Phi?
 
 
+### Offloading
+
+[This code](src/hello-world-offload.c) offloads part of program to the Intel
+Xeon Phi.
+
+In order to build the executable one should perform:
+
+```bash
+icc hello-world-offload.c -o hello-world-offload
+./hello-world-offload
+```
+
+One should note that the binary is executed **at the host**. It is responsible
+for copying the code that should be offloaded to the Intel Xeon Phi board and
+executing it.
+
+The directive `#pragma offload target(mic)` tells the host to delegate part of
+its execution to the Intel Xeon Phi board (if any present). In case the host has
+no board attached, the code is executed only at the host machine.
+
+#### Offload with Data Transfer
+
+[This code](src/hello-world-offload-data-transfer1.c) shows how to implement a
+function with data transfer to be executed on intel Xeon Phi.
+
+```bash
+icc hello-world-offload-data-transfer1.c -o hello-world-offload-data-transfer1
+./hello-world-offload-data-transfer1
+```
+
+One should note that the directive `__attribute__((target(mic)))` is responsible
+for telling the compiler that the following function can be executed at the
+Intel Xeon Phi if any available.
+
+The following directive tells that the variables `a`, `b`, and `sum` should me
+made available also at the coprocessor. 
+
+```C
+__declspec(target(mic))
+double a, b, sum;
+```
+
+
+##### Offload Debugging
+
+The Operating System reads the content of the variable `OFFLOAD_REPORT` in order
+to establish how much debugging output should be generated while executing the
+offload operation.
+
+To discover how much data was transfered from the host to the mic and vice-versa
+one should set the value of `OFFLOAD_REPORT` to **2**:
+
+```bash
+export OFFLOAD_REPORT=2
+```
+
+Then ran the same code:
+
+```bash
+./hello-world-offload-data-transfer1
+```
+
+After that one should be able to answer the following question:
+
+1. How much data was trasfered from the host to the mic  and from the mic to the
+host?
