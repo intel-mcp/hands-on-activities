@@ -39,3 +39,20 @@ Answer the following questions:
 
 6. How many cores are there at each Intel Xeon Phi board? How many threads can
 each core execute?
+
+
+### Compiling and Running for Intel Xeon and Intel Xeon Phi
+
+[This code](src/hello-world.c) shows the amount of available threads
+available.
+
+In order to compile and run the code one must perform the commands:
+
+```bash
+icc hello-world.c -o hello-world
+./hello-world
+```
+
+The `icc` command is the main C compiler provided by the Intel Parallel Studio.
+
+
