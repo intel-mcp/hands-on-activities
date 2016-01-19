@@ -137,7 +137,7 @@ Intel Xeon Phi if any available.
 The following directive tells that the variables `a`, `b`, and `sum` should me
 made available also at the coprocessor. 
 
-```C
+```c
 __declspec(target(mic))
 double a, b, sum;
 ```
