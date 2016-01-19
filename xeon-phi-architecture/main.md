@@ -76,15 +76,15 @@ error:
 You can run execute the generated binary file at the Intel Xeon Phi using one of
 the following alternatives:
 
-1. Run it using the `micnativeloadex` tool:  
+##### Run it using the `micnativeloadex` tool:  
 
 ```bash
 micnativeloadex hello-world.mic
 ```
 
-2. or alternatively you can perform a secure copy to the Intel Xeon Phi filesystem
-and execute it locally. For instance if you are willing to run the example at
-the _mic0_ board, perform the following sequence of commands:
+##### or alternatively you can perform a secure copy to the Intel Xeon Phi
+filesystem and execute it locally. For instance if you are willing to run the
+example at the _mic0_ board, perform the following sequence of commands:
 
 ```bash
 scp hello-world.mic mic0:~/
