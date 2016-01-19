@@ -82,9 +82,11 @@ the following alternatives:
 micnativeloadex hello-world.mic
 ```
 
-##### or alternatively you can perform a secure copy to the Intel Xeon Phi
-filesystem and execute it locally. For instance if you are willing to run the
-example at the _mic0_ board, perform the following sequence of commands:
+##### Run locally on Intel Xeon Phi
+
+Alternatively you can perform a secure copy to the Intel Xeon Phi filesystem and
+execute it locally. For instance if you are willing to run the example at the
+_mic0_ board, perform the following sequence of commands:
 
 ```bash
 scp hello-world.mic mic0:~/
@@ -92,5 +94,9 @@ ssh mic0
 ./hello-world.mic
 ```
 
+Now that you performed your first program execution at the Intel Xeon Phi,
+answer the question:
+
+1. How Many threads are available at the Intel Xeon? And at the Intel Xeon Phi?
 
 
