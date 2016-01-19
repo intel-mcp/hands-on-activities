@@ -122,12 +122,12 @@ no board attached, the code is executed only at the host machine.
 
 #### Offload with Data Transfer
 
-[This code](src/hello-world-offload-data-transfer1.c) shows how to implement a
+[This code](src/hello-world-offload-data-transfer.c) shows how to implement a
 function with data transfer to be executed on intel Xeon Phi.
 
 ```bash
-icc hello-world-offload-data-transfer1.c -o hello-world-offload-data-transfer1
-./hello-world-offload-data-transfer1
+icc hello-world-offload-data-transfer.c -o hello-world-offload-data-transfer
+./hello-world-offload-data-transfer
 ```
 
 One should note that the directive `__attribute__((target(mic)))` is responsible
@@ -156,13 +156,62 @@ one should set the value of `OFFLOAD_REPORT` to **2**:
 export OFFLOAD_REPORT=2
 ```
 
-Then ran the same code:
+Then run the same code:
 
 ```bash
-./hello-world-offload-data-transfer1
+./hello-world-offload-data-transfer
 ```
 
 After that one should be able to answer the following question:
 
 1. How much data was trasfered from the host to the mic  and from the mic to the
 host?
+
+#### Access to Environment Variables while Offloading
+
+[This code](src/hello-world-offload2.c) shows how to access environment
+variables from within a C code. 
+
+The code `hello-world-offload3.c` prints the value of the environment variable
+`ENV_VAR`.
+
+In order to test the code one should define the value of such variable:
+
+```bash
+export ENV_VAR=2
+```
+
+Then compile and execute the code:
+
+```bash
+icc hello-world-offload2.c -o hello-world-offload2
+./hello-world-offload2
+```
+
+One can easily see that both mic and host share the same environment variable.
+This can be the case in many applications, but sometimes it useful to make a
+distinction of the variable content. We can do that defining a prefix to all
+variables that will be made available to the mic operating system.
+
+In order to define such prefix one has to define the `MIC_ENV_PREFIX` variable:
+
+```bash
+export MIC_ENV_PREFIX=PHI
+```
+
+Now the software being offloaded has a separate context from the software being
+executed at the host. 
+
+Lets check what would be the output of the variable if we define a separate
+value for the mic:
+
+```bash
+export PHI_ENV_VAR=4
+./hello-world-offload2
+```
+
+After that one should be able to answer the following questions:
+
+1. Is it possible to define which mic will be used for the offload?
+
+2. What happens if we don't define the `PHI_ENV_VAR`?
