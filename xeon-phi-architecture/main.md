@@ -27,4 +27,15 @@ Answer the following questions:
   You can use the `micsmc` to retrieve information about the Intel Xeon Phi
   boards.
 
+4. How many cores are there available at the Xeon Phi Processor?  
+  
+  The special file `/proc/cpuinfo` contains information about the installed
+  processors.
 
+5. How many threads can the processor execute in parallel?  
+
+  The same file (`/proc/cpuinfo`) holds information about how many threads each
+  core can execute in parallel.
+
+6. How many cores are there at each Intel Xeon Phi board? How many threads can
+each core execute?
