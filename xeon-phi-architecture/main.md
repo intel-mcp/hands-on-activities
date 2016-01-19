@@ -46,6 +46,7 @@ each core execute?
 [This code](src/hello-world.c) shows the amount of available threads
 available.
 
+#### Running on Intel Xeon (host)
 In order to compile and run the code one must perform the commands:
 
 ```bash
@@ -54,5 +55,42 @@ icc hello-world.c -o hello-world
 ```
 
 The `icc` command is the main C compiler provided by the Intel Parallel Studio.
+
+#### Running on Intel Xeon Phi (mic)
+
+Compile and run in Intel Xeon Phi using `micnativeloadex`:
+
+```bash
+icc hello-world.c -o hello-world.mic -mmic
+```
+
+The previous `icc` command execution generated a new binary file that can run on
+the Intel Xeon Phi architecture. That same file is not compatible with the
+**x86_64** architecture. If you try to run it you'll probably get the following
+error:
+
+```
+-bash: ./hello-world.mic: impossible to execute binary file
+```
+
+You can run execute the generated binary file at the Intel Xeon Phi using one of
+the following alternatives:
+
+1. Run it using the `micnativeloadex` tool:  
+
+```bash
+micnativeloadex hello-world.mic
+```
+
+2. or alternatively you can perform a secure copy to the Intel Xeon Phi filesystem
+and execute it locally. For instance if you are willing to run the example at
+the _mic0_ board, perform the following sequence of commands:
+
+```bash
+scp hello-world.mic mic0:~/
+ssh mic0
+./hello-world.mic
+```
+
 
 
