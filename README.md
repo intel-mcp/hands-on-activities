@@ -9,3 +9,5 @@ training sessions.
 
 1. [Working With Intel Xeon and Intel Xeon Phi
 Architecture](xeon-phi-architecture/main.md)
+
+1. [Vectorization](vectorization/main.md)
