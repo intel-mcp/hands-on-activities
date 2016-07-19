@@ -2,6 +2,6 @@ Vectorization hands on activities
 =================================
 
 1. [Activities
-Guide](blob/master/vectorization/vectorizationV3.pdf)
+Guide](/blob/master/vectorization/vectorizationV3.pdf)
 
-1. [Source code](tree/master/vectorization)
+1. [Source code](/tree/master/vectorization)
